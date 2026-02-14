@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Be My Valentine?</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(to bottom right, #ffe6f0, #ffffff);
+        font-family: 'Segoe UI', sans-serif;
+        overflow: hidden;
+    }
+
+    .card {
+        text-align: center;
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(255, 105, 180, 0.3);
+        max-width: 400px;
+        position: relative;
+    }
+
+    h1 {
+        color: #ff4da6;
+        margin-bottom: 30px;
+    }
+
+    .buttons {
+        position: relative;
+        height: 120px; /* reduced height */
+        margin-bottom: 15px;
+    }
+
+    button {
+        padding: 12px 25px;
+        font-size: 18px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        position: absolute;
+    }
+
+    #yesBtn {
+        background-color: #ff4da6;
+        color: white;
+        left: 40px;
+        top: 40px;
+    }
+
+    #noBtn {
+        background-color: #cccccc;
+        color: black;
+        left: 200px;
+        top: 40px;
+    }
+
+    img {
+        margin-top: 10px; /* moved image up */
+        width: 100%;
+        border-radius: 15px;
+        display: none;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Will you be my Valentine? 💖</h1>
+
+    <div class="buttons" id="btnArea">
+        <button id="yesBtn">Yes 💘</button>
+        <button id="noBtn">No 🙈</button>
+    </div>
+
+    <img id="meme" src="images\bm!.jpeg" alt="Good Choice "/>
+</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const meme = document.getElementById("meme");
+    const area = document.getElementById("btnArea");
+
+    // Keep No button inside the button area
+    function moveNoButton() {
+        const btnRect = noBtn.getBoundingClientRect();
+
+        const maxX = area.clientWidth - btnRect.width;
+        const maxY = area.clientHeight - btnRect.height;
+
+        const x = Math.random() * maxX;
+        const y = Math.random() * maxY;
+
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    }
+
+    // Works for both mouse and touch (mobile)
+    noBtn.addEventListener("mouseenter", moveNoButton);
+    noBtn.addEventListener("touchstart", moveNoButton);
+
+    // When Yes is clicked
+    yesBtn.addEventListener("click", function () {
+        noBtn.style.display = "none";   // hide No button
+        meme.style.display = "block";  // show image
+        meme.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+</script>
+
+</body>
+</html>
